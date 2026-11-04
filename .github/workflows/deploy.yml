@@ -1,10 +1,14 @@
-# Based on the official Astro guide: https://docs.astro.build/en/guides/deploy/github/
+
+# Based on the official Astro guide:
+# https://docs.astro.build/en/guides/deploy/github/
+
 name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [main]      # change if your default branch has another name
-  workflow_dispatch:      # allows manual runs from the Actions tab
+    branches:
+      - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,18 +18,24 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Install, build, and upload site
         uses: withastro/action@v3
+        with:
+          node-version: 22.22.0
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
