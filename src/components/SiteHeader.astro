@@ -1,0 +1,38 @@
+---
+import { href, profile } from '../data/portfolio';
+const path = Astro.url.pathname;
+const nav = [
+  { label: 'Home', to: '', icon: 'house' },
+  { label: 'Work', to: 'work/isched/', icon: 'kanban' },
+  { label: 'About', to: 'about/', icon: 'person' },
+  { label: 'Skills', to: 'skills/', icon: 'braces' },
+  { label: 'Contact', to: 'contact/', icon: 'envelope' },
+];
+const current = (to: string) => (to === '' ? path === href('') : path.startsWith(href(to)));
+---
+<header class="sticky-top site-header">
+  <nav class="navbar navbar-expand-md" aria-label="Primary">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href={href('')} aria-label={`${profile.name} — home`}>
+        <span class="brand-name">{profile.name}</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="bi bi-list fs-2" aria-hidden="true"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto gap-md-1 pt-2 pt-md-0">
+          {nav.map((n) => (
+            <li class="nav-item">
+              <a class="nav-link" href={href(n.to)} aria-current={current(n.to) ? 'page' : undefined}>
+                <i class={`bi bi-${n.icon} d-md-none me-2`} aria-hidden="true"></i>{n.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<script>
+  import 'bootstrap/js/dist/collapse';
+</script>

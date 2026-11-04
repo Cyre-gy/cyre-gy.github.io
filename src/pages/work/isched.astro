@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
+import Screenshot from '../../components/Screenshot.astro';
+import { href, isched as p, screens } from '../../data/portfolio';
+const flow = [['building', 'Departments'], ['person-badge', 'Faculty assignment'], ['calendar-plus', 'Schedule creation'], ['table', 'Timetable']];
+const meta = [['kanban', 'Project', p.fullName], ['bank', 'Institution', 'Southern Luzon State University'], ['calendar3', 'Year', p.year], ['person-badge', 'My role', p.role], ['people', 'Type', p.type]];
+const hasLinks = Boolean(p.repoUrl || p.demoUrl);
+const toc = [['overview', 'Overview'], ['problem', 'The problem'], ['goals', 'Goals'], ['role', 'My role'], ['approach', 'Approach'], ['screens', 'System screens'], ['considerations', 'Considerations'], ['lessons', 'Lessons learned'], ...(hasLinks ? [['links', 'Project links']] : [])];
+---
+<BaseLayout title="iSched case study" description="Case study of iSched, a team-built web-based class scheduling management system and capstone project at Southern Luzon State University.">
+  <PageHero eyebrow="Case study" title={`${p.name}: class scheduling, organized.`} icon="kanban">{p.tagline}</PageHero>
+
+  <section class="facts-strip" aria-label="Project details">
+    <div class="container"><div class="row g-0">
+      {meta.map(([icon, l, v]) => <div class="col-sm-6 col-lg fact"><i class={`bi bi-${icon}`} aria-hidden="true"></i><div><div class="mono">{l}</div><div class="fact-v">{v}</div></div></div>)}
+    </div></div>
+  </section>
+
+  <div class="container section">
+    <div class="row g-5">
+      <aside class="col-lg-3"><nav class="toc sticky-lg-top" aria-label="On this page">
+        <p class="mono">On this page</p>
+        <ul class="list-unstyled">{toc.map(([id, l]) => <li><a href={`#${id}`}>{l}</a></li>)}</ul>
+      </nav></aside>
+      <div class="col-lg-9 case">
+        <Screenshot shot={screens[0]} eager={true} />
+
+        <section id="overview"><SectionHeading num="01" label="Overview" title="Overview" icon="eye" /><p class="lead">{p.overview}</p></section>
+
+        <section id="problem"><SectionHeading num="02" label="Problem" title="The problem" icon="exclamation-diamond" /><p>{p.problem}</p>
+          <figure class="illus flow">
+            <ol class="list-unstyled mb-0 row g-3">{flow.map(([icon, l]) => <li class="col-6 col-md-3"><div class="flow-node"><i class={`bi bi-${icon}`} aria-hidden="true"></i>{l}</div></li>)}</ol>
+            <figcaption class="mono">Conceptual diagram of the scheduling workflow iSched addresses</figcaption>
+          </figure>
+        </section>
+
+        <section id="goals"><SectionHeading num="03" label="Goals" title="Project goals" icon="bullseye" />
+          <ul class="list-unstyled check-list">{p.goals.map((g) => <li><i class="bi bi-check2-circle" aria-hidden="true"></i><span>{g}</span></li>)}</ul></section>
+
+        <section id="role"><SectionHeading num="04" label="My role" title="My role and contributions" icon="person-badge" />
+          <div class="row g-4">
+            <div class="col-md-6"><div class="card info-card h-100"><div class="card-body"><i class="bi bi-people" aria-hidden="true"></i><div class="mono">Team responsibility</div><p class="mt-2 mb-0">{p.teamWork}</p></div></div></div>
+            <div class="col-md-6"><div class="card info-card h-100"><div class="card-body"><i class="bi bi-person-check" aria-hidden="true"></i><div class="mono">My participation as {p.role}</div>
+              <ul class="list-unstyled check-list mt-2 mb-0">{[...p.participation, ...p.contributionDetails].map((x) => <li><i class="bi bi-dash-lg" aria-hidden="true"></i><span>{x}</span></li>)}</ul></div></div></div>
+          </div></section>
+
+        <section id="approach"><SectionHeading num="05" label="Approach" title="Design and development approach" icon="signpost-split" />
+          <ol class="list-unstyled row g-3 process">{p.process.map(([t, d], i) => <li class="col-md-6 col-xl"><div class="step"><span class="mono">{String(i + 1).padStart(2, '0')}</span><h3>{t}</h3><p>{d}</p></div></li>)}</ol>
+          {p.technologies.length > 0 && <p class="mt-3">{p.technologies.map((t) => <span class="tag me-2">{t}</span>)}</p>}</section>
+
+        <section id="screens"><SectionHeading num="06" label="System screens" title="The system in use" icon="window-stack" />
+          <p>Screenshots of the current iSched system, captured from the running application.</p>
+          <div class="row g-4">{screens.slice(1).map((s) => <div class="col-md-6"><Screenshot shot={s} /></div>)}</div></section>
+
+        <section id="considerations"><SectionHeading num="07" label="Considerations" title="Technical and system considerations" icon="gear" />
+          <div class="row g-4">{p.considerations.map(([t, d]) => <div class="col-md-4"><div class="pillar"><h3>{t}</h3><p>{d}</p></div></div>)}</div></section>
+
+        <section id="lessons"><SectionHeading num="08" label="Lessons" title="Lessons learned" icon="lightbulb" />
+          <ul class="list-unstyled check-list">{p.lessons.map((l) => <li><i class="bi bi-check2-circle" aria-hidden="true"></i><span>{l}</span></li>)}</ul></section>
+
+        {hasLinks && (
+          <section id="links"><SectionHeading num="09" label="Links" title="Project links" icon="link-45deg" />
+            <div class="d-flex gap-3 flex-wrap">
+              {p.repoUrl && <a class="btn btn-ink" href={p.repoUrl} rel="noopener"><i class="bi bi-github me-2" aria-hidden="true"></i>Repository</a>}
+              {p.demoUrl && <a class="btn btn-accent" href={p.demoUrl} rel="noopener"><i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Live demo</a>}
+            </div></section>
+        )}
+        <a class="btn btn-outline-dark" href={href('contact/')}><i class="bi bi-envelope me-2" aria-hidden="true"></i>Questions about this project?</a>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

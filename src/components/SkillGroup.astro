@@ -1,0 +1,18 @@
+---
+const { group, index, accent = 'cobalt' } = Astro.props;
+const icons: Record<string, string> = {
+  'Programming languages': 'braces', 'Database': 'database', 'Frameworks & libraries': 'bootstrap',
+  'Development tools': 'tools', 'Productivity tools': 'file-earmark-bar-graph', 'Languages': 'translate',
+};
+const levelClass = (l: string) => (l === 'Advanced' ? 'lv-adv' : l === 'Basic' ? 'lv-basic' : l.startsWith('Intermediate') ? 'lv-mid' : 'lv-lang');
+---
+<section class={`card skill-card h-100 accent-${accent}`} aria-labelledby={`sg-${index}`}>
+  <div class="card-body">
+    <h3 id={`sg-${index}`} class="skill-title"><i class={`bi bi-${icons[group.title] ?? 'dot'}`} aria-hidden="true"></i>{group.title}</h3>
+    <ul class="list-unstyled mb-0">
+      {group.items.map(([name, level]: [string, string]) => (
+        <li class="skill-row"><span>{name}</span>{level !== 'Intermediate' && <span class={`level ${levelClass(level)}`}>{level}</span>}</li>
+      ))}
+    </ul>
+  </div>
+</section>

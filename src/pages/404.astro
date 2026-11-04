@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { href } from '../data/portfolio';
+---
+<BaseLayout title="Page not found">
+  <PageHero eyebrow="Error 404" title="This page could not be found." icon="compass">
+    The page you're looking for doesn't exist or has moved.
+  </PageHero>
+  <section class="section container">
+    <a class="btn btn-ink btn-lg" href={href('')}><i class="bi bi-house me-2" aria-hidden="true"></i>Back to the homepage</a>
+  </section>
+</BaseLayout>

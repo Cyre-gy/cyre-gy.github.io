@@ -1,0 +1,32 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import { profile } from '../data/portfolio';
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<BaseLayout title="Contact" description="Contact Cherry Rose Gunay by email or LinkedIn for internships, collaboration, and networking.">
+  <PageHero eyebrow="Contact" title="Let's start a conversation." icon="chat-dots">
+    I'm open to internship opportunities, academic collaboration, and professional networking. Email is the quickest way to reach me.
+  </PageHero>
+  <section class="section container">
+    <div class="row g-4">
+      <div class="col-md-4"><div class="card info-card h-100"><div class="card-body p-4">
+        <i class="bi bi-envelope" aria-hidden="true"></i><div class="mono">Email</div>
+        <p class="info-v">{profile.email}</p>
+        <a class="btn btn-ink" href={`mailto:${profile.email}`}>Send an email</a>
+      </div></div></div>
+      <div class="col-md-4"><div class="card info-card h-100"><div class="card-body p-4">
+        <i class="bi bi-linkedin" aria-hidden="true"></i><div class="mono">LinkedIn</div>
+        <p class="info-v">cherry-rose-gunay</p>
+        <a class="btn btn-ink" href={profile.linkedin} rel="noopener">Open profile <i class="bi bi-box-arrow-up-right ms-1" aria-hidden="true"></i></a>
+      </div></div></div>
+      <div class="col-md-4"><div class="card info-card h-100"><div class="card-body p-4">
+        <i class="bi bi-github" aria-hidden="true"></i><div class="mono">GitHub</div>
+        <p class="info-v">Cyre-gy</p>
+        <a class="btn btn-ink" href={profile.github} rel="noopener">View profile <i class="bi bi-box-arrow-up-right ms-1" aria-hidden="true"></i></a>
+      </div></div></div>
+    </div>
+    <p class="mt-4 mb-0"><i class="bi bi-geo-alt me-2" aria-hidden="true"></i>Based in {profile.location}</p>
+    {profile.resumePdf && <p class="mt-3"><a class="btn btn-outline-dark" href={`${base}/${profile.resumePdf}`} download><i class="bi bi-download me-2" aria-hidden="true"></i>Download résumé (PDF)</a></p>}
+  </section>
+</BaseLayout>

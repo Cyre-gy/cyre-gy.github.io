@@ -1,0 +1,15 @@
+---
+const { items } = Astro.props;
+---
+<ul class="list-group cert-list">
+  {items.map((c: any) => (
+    <li class="list-group-item d-flex flex-wrap align-items-center gap-3">
+      <i class="bi bi-patch-check-fill cert-icon" aria-hidden="true"></i>
+      <div class="flex-grow-1">
+        <div class="cert-name">{c.name}</div>
+        <div class="cert-issuer">{c.issuer}</div>
+      </div>
+      <span class="mono cert-date">{c.date ?? 'No date listed'}</span>
+    </li>
+  ))}
+</ul>

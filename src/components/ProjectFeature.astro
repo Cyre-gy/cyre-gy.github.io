@@ -1,0 +1,25 @@
+---
+import { href, isched, screens } from '../data/portfolio';
+import Screenshot from './Screenshot.astro';
+---
+<article class="card feature">
+  <div class="row g-0 align-items-center">
+    <div class="col-lg-7 p-3 p-lg-4"><Screenshot shot={screens[1]} caption={false} /></div>
+    <div class="col-lg-5 p-4 p-lg-5">
+      <div class="d-flex flex-wrap gap-2 mb-3">
+        <span class="tag">Capstone project</span><span class="tag">Team-based</span><span class="tag">{isched.year}</span>
+      </div>
+      <h3 class="feature-title">{isched.name}</h3>
+      <p class="lead">{isched.tagline}</p>
+      <p>{isched.overview}</p>
+      <ul class="list-unstyled meta-icons">
+        <li><i class="bi bi-person-badge" aria-hidden="true"></i><span><strong>Role:</strong> {isched.role}</span></li>
+        <li><i class="bi bi-building" aria-hidden="true"></i><span><strong>Institution:</strong> Southern Luzon State University</span></li>
+      </ul>
+      <div class="d-flex flex-wrap gap-2">
+        <a class="btn btn-ink" href={href('work/isched/')}>Read the case study <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+        {isched.demoUrl && <a class="btn btn-outline-dark" href={isched.demoUrl} rel="noopener"><i class="bi bi-box-arrow-up-right me-2" aria-hidden="true"></i>Open live system</a>}
+      </div>
+    </div>
+  </div>
+</article>

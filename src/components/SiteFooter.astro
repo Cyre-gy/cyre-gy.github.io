@@ -1,0 +1,35 @@
+---
+import { href, profile } from '../data/portfolio';
+---
+<footer class="site-footer">
+  <div class="container py-5">
+    <div class="row g-4">
+      <div class="col-md-6">
+        <p class="foot-name">{profile.name}</p>
+        <p class="mb-0 foot-sub">Fourth-year BSIT student at {profile.school}.</p>
+      </div>
+      <div class="col-6 col-md-3">
+        <h2 class="foot-h">Explore</h2>
+        <ul class="list-unstyled mb-0">
+          <li><a href={href('work/isched/')}>iSched case study</a></li>
+          <li><a href={href('about/')}>About</a></li>
+          <li><a href={href('skills/')}>Skills</a></li>
+          <li><a href={href('contact/')}>Contact</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-md-3">
+        <h2 class="foot-h">Connect</h2>
+        <ul class="list-unstyled mb-0">
+          <li><a href={`mailto:${profile.email}`}><i class="bi bi-envelope me-2" aria-hidden="true"></i>Email</a></li>
+          <li><a href={profile.linkedin} rel="noopener"><i class="bi bi-linkedin me-2" aria-hidden="true"></i>LinkedIn</a></li>
+          <li><a href={profile.github} rel="noopener"><i class="bi bi-github me-2" aria-hidden="true"></i>GitHub</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="foot-rule" />
+    <div class="d-flex flex-wrap justify-content-between gap-2 mono">
+      <span>© {new Date().getFullYear()} {profile.name} · {profile.location}</span>
+      <a href="#top"><i class="bi bi-arrow-up me-1" aria-hidden="true"></i>Back to top</a>
+    </div>
+  </div>
+</footer>

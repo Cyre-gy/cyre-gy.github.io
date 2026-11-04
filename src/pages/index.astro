@@ -1,0 +1,93 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectFeature from '../components/ProjectFeature.astro';
+import SkillGroup from '../components/SkillGroup.astro';
+import CertificationList from '../components/CertificationList.astro';
+import Screenshot from '../components/Screenshot.astro';
+import { href, profile, skillGroups, certifications, featuredCertNames, screens } from '../data/portfolio';
+const featured = certifications.filter((c) => featuredCertNames.includes(c.name));
+const facts = [
+  ['geo-alt', 'Based in', 'Lucban, Quezon'],
+  ['mortarboard', 'Studying', 'BS Information Technology'],
+  ['award', 'Certifications', 'TESDA and Cisco Networking Academy'],
+  ['code-slash', 'Focus', 'Web apps, UI/UX, databases'],
+];
+const pillars = [
+  ['diagram-3', 'Systems and databases', 'Requirements analysis, system design, and database design through the iSched capstone project.'],
+  ['window-desktop', 'Web and interface', 'Interested in web application development and UI/UX design, with HTML, CSS, and Bootstrap in my toolkit.'],
+  ['people', 'Teaching and teamwork', 'Teammate on a collaborative capstone and volunteer instructor for Microsoft Office Skills Training.'],
+];
+---
+<BaseLayout title={profile.name}>
+  <section class="jumbotron">
+    <div class="container py-5">
+      <div class="row align-items-center g-5 py-lg-4">
+        <div class="col-lg-6">
+          <p class="status-pill"><i class="bi bi-mortarboard-fill" aria-hidden="true"></i>BSIT · Fourth-year · SLSU</p>
+          <h1 class="hero-title">Making everyday systems a little more <em>thoughtful.</em></h1>
+          <p class="lead on-dark-text">{profile.intro}</p>
+          <div class="d-flex flex-wrap gap-3 mt-4">
+            <a class="btn btn-accent btn-lg" href={href('work/isched/')}><i class="bi bi-kanban me-2" aria-hidden="true"></i>View the iSched case study</a>
+            <a class="btn btn-outline-light btn-lg" href={href('contact/')}><i class="bi bi-envelope me-2" aria-hidden="true"></i>Get in touch</a>
+          </div>
+        </div>
+        <div class="col-lg-6"><Screenshot shot={screens[1]} eager={true} /></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="facts-strip" aria-label="At a glance">
+    <div class="container">
+      <div class="row g-0">
+        {facts.map(([icon, label, value]) => (
+          <div class="col-6 col-lg-3 fact"><i class={`bi bi-${icon}`} aria-hidden="true"></i><div><div class="mono">{label}</div><div class="fact-v">{value}</div></div></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section container">
+    <SectionHeading num="01" label="Selected work" title="Featured project" icon="kanban" />
+    <ProjectFeature />
+  </section>
+
+  <section class="section container pt-0">
+    <SectionHeading num="02" label="About" title="A student who likes systems that work" icon="person" />
+    <div class="row g-4">
+      {pillars.map(([icon, t, d]) => (
+        <div class="col-md-4"><div class="pillar"><i class={`bi bi-${icon}`} aria-hidden="true"></i><h3>{t}</h3><p>{d}</p></div></div>
+      ))}
+    </div>
+    <a class="btn btn-outline-dark mt-4" href={href('about/')}>More about me <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+  </section>
+
+  <section class="band-surface">
+    <div class="section container">
+      <SectionHeading num="03" label="Skills" title="What I work with" icon="braces" />
+      <div class="row g-4">
+        {skillGroups.slice(0, 4).map((g, i) => <div class="col-md-6 col-xl-3"><SkillGroup group={g} index={i} accent={['cobalt', 'orange', 'ink', 'chart'][i]} /></div>)}
+      </div>
+      <a class="btn btn-outline-dark mt-4" href={href('skills/')}>Full skills index <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+    </div>
+  </section>
+
+  <section class="section container">
+    <SectionHeading num="04" label="Certifications" title="Training along the way" icon="patch-check" />
+    <CertificationList items={featured} />
+    <a class="btn btn-outline-dark mt-4" href={href('about/#certifications')}>All certifications <i class="bi bi-arrow-right ms-1" aria-hidden="true"></i></a>
+  </section>
+
+  <section class="jumbotron cta">
+    <div class="container py-5 text-center">
+      <p class="eyebrow on-dark justify-content-center"><i class="bi bi-chat-dots" aria-hidden="true"></i>05 Contact</p>
+      <h2 class="cta-title">Let's talk.</h2>
+      <p class="lead on-dark-text mx-auto" style="max-width:36rem">I'm looking for internship opportunities, academic collaboration, and conversations with people in the field.</p>
+      <div class="d-flex flex-wrap justify-content-center gap-3 mt-4">
+        <a class="btn btn-accent btn-lg" href={`mailto:${profile.email}`}><i class="bi bi-envelope me-2" aria-hidden="true"></i>{profile.email}</a>
+        <a class="btn btn-outline-light btn-lg" href={profile.linkedin} rel="noopener"><i class="bi bi-linkedin me-2" aria-hidden="true"></i>LinkedIn</a>
+        <a class="btn btn-outline-light btn-lg" href={profile.github} rel="noopener"><i class="bi bi-github me-2" aria-hidden="true"></i>GitHub</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

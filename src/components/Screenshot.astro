@@ -1,0 +1,8 @@
+---
+import { href } from '../data/portfolio';
+const { shot, eager = false, caption = true } = Astro.props;
+---
+<figure class="shot">
+  <div class="shot-frame"><img src={href(shot.file)} alt={shot.alt} width={shot.w} height={shot.h} loading={eager ? 'eager' : 'lazy'} decoding="async" /></div>
+  {caption && <figcaption><strong>{shot.title}.</strong> {shot.caption}</figcaption>}
+</figure>

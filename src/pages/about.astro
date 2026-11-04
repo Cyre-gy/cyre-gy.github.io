@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import CertificationList from '../components/CertificationList.astro';
+import { href, profile, certifications, outreach } from '../data/portfolio';
+const edu = [['bank', 'School', profile.school], ['mortarboard', 'Degree', profile.degree], ['calendar-check', 'Year level', 'Fourth-year'], ['geo-alt', 'Location', profile.location]];
+---
+<BaseLayout title="About" description="Education, background, community involvement, and certifications of Cherry Rose Gunay, a fourth-year BSIT student at SLSU.">
+  <PageHero eyebrow="About" title="Learning to build software, and to explain it." icon="person">
+    A fourth-year IT student developing practical skills through academic projects, teamwork, and community teaching.
+  </PageHero>
+
+  <section class="section container">
+    <SectionHeading num="01" label="Education" title="Education" icon="mortarboard" />
+    <div class="row g-4">
+      {edu.map(([icon, l, v]) => (
+        <div class="col-md-6 col-xl-3"><div class="card info-card h-100"><div class="card-body"><i class={`bi bi-${icon}`} aria-hidden="true"></i><div class="mono">{l}</div><div class="info-v">{v}</div></div></div></div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section container pt-0">
+    <SectionHeading num="02" label="Background" title="Background" icon="journal-text" />
+    <div class="row"><div class="col-lg-8 prose">
+      <p>I'm a fourth-year Information Technology student building practical software skills through academic projects. My work so far covers requirements analysis, system and database design, front-end and back-end development, testing, debugging, and technical documentation.</p>
+      <p>Most of that experience comes from iSched, our team capstone project. Working with teammates taught me that good software depends as much on shared understanding and clear documentation as on code.</p>
+      <p>Outside the classroom, I've taught Microsoft Office skills to people with little computer experience. Explaining a spreadsheet to a beginner is good practice for explaining a system to a stakeholder: start from what they already know, and keep the language simple.</p>
+      <p>I'm especially drawn to web application development, UI/UX design, and database management, and I enjoy learning new technologies as I go.</p>
+    </div></div>
+  </section>
+
+  <section class="band-surface">
+    <div class="section container">
+      <SectionHeading num="03" label="Community" title="Community involvement" icon="people" />
+      <article class="card outreach"><div class="card-body p-4 p-lg-5">
+        <h3>{outreach.title}</h3>
+        <ul class="list-inline meta-line">
+          <li class="list-inline-item"><i class="bi bi-person-badge" aria-hidden="true"></i>{outreach.role}</li>
+          <li class="list-inline-item"><i class="bi bi-building" aria-hidden="true"></i>{outreach.org}</li>
+          <li class="list-inline-item"><i class="bi bi-geo-alt" aria-hidden="true"></i>{outreach.place}</li>
+          <li class="list-inline-item"><i class="bi bi-calendar3" aria-hidden="true"></i>{outreach.year}</li>
+        </ul>
+        <ul class="list-unstyled check-list mb-0">{outreach.points.map((p) => <li><i class="bi bi-check2-circle" aria-hidden="true"></i><span>{p}</span></li>)}</ul>
+      </div></article>
+    </div>
+  </section>
+
+  <section class="section container" id="certifications">
+    <SectionHeading num="04" label="Certifications" title="Certifications and training" icon="patch-check" />
+    <CertificationList items={certifications} />
+    <a class="btn btn-ink mt-4" href={href('contact/')}><i class="bi bi-envelope me-2" aria-hidden="true"></i>Get in touch</a>
+  </section>
+</BaseLayout>

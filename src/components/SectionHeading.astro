@@ -1,0 +1,7 @@
+---
+const { num, label, title, icon = 'dash' } = Astro.props;
+---
+<div class="sec-head">
+  <p class="eyebrow"><i class={`bi bi-${icon}`} aria-hidden="true"></i><span>{num}</span> {label}</p>
+  <h2>{title}</h2>
+</div>

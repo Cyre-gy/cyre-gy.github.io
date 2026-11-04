@@ -1,0 +1,10 @@
+---
+const { eyebrow, title, icon = 'dash-lg' } = Astro.props;
+---
+<section class="jumbotron jumbotron-sm">
+  <div class="container py-5">
+    <p class="eyebrow on-dark"><i class={`bi bi-${icon}`} aria-hidden="true"></i>{eyebrow}</p>
+    <h1 class="page-title">{title}</h1>
+    <div class="lead on-dark-text"><slot /></div>
+  </div>
+</section>

@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import SkillGroup from '../components/SkillGroup.astro';
+import { skillGroups } from '../data/portfolio';
+const accents = ['cobalt', 'orange', 'ink', 'chart', 'cobalt', 'orange'];
+---
+<BaseLayout title="Skills" description="Skills of Cherry Rose Gunay by category and proficiency: programming, databases, tools, productivity software, and languages.">
+  <PageHero eyebrow="Skills index" title="What I work with." icon="braces">
+    Organized by category. Where a level is shown, it is my own self-assessment.
+  </PageHero>
+  <section class="section container" aria-label="Skills by category">
+    <div class="row g-4">
+      {skillGroups.map((g, i) => <div class:list={['col-md-6', { 'col-xl-4': i > 1 }]}><SkillGroup group={g} index={i} accent={accents[i]} /></div>)}
+    </div>
+  </section>
+</BaseLayout>
